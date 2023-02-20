@@ -5,6 +5,11 @@
   src: url(font/mogihaPen.ttf);
 }
 
+:root {
+  --x-color: #0d9488;
+  --o-color: #ef4444;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -37,6 +42,14 @@ h3 {
   text-align: center;
 }
 
+h3 > b {
+  color: var(--x-color);
+}
+
+h3 > b:nth-child(2) {
+  color: var(--o-color);
+}
+
 #selection {
   margin-top: 50px;
   display: flex;
@@ -49,6 +62,7 @@ h3 {
   font-size: 22px;
   margin-bottom: 15px;
   text-align: center;
+  color: #0e7490;
 }
 
 .cat-inst.ani {
@@ -66,7 +80,7 @@ h3 {
     width: 0;
   }
   to {
-    width: 600px;
+    width: 100%;
   }
 }
 
@@ -121,4 +135,44 @@ h3 {
 #cat-foot {
   margin-left: 5px;
   width: 22px;
+}
+
+.board-container {
+  margin-top: 5vh;
+  display: none;
+  justify-content: center;
+}
+
+#gameboard {
+  width: 450px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box {
+  height: 150px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  color: black;
+  font-size: 120px;
+  border-right: 2px black solid;
+  border-bottom: 2px black solid;
+  line-height: 120px;
+}
+
+.box.o {
+  color: var(--o-color);
+}
+
+.box.x {
+  color: var(--x-color);
+}
+
+.box:nth-child(3n) {
+  border-right: none;
+}
+
+.box:nth-child(6) ~ .box {
+  border-bottom: none;
 }
