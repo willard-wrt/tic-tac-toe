@@ -82,6 +82,7 @@ h3 {
 }
 
 .cat-mark {
+  cursor: pointer;
   background-repeat: no-repeat;
   background-size: contain;
   height: 230px;
@@ -94,4 +95,30 @@ h3 {
 
 .cat-mark.x {
   background-image: url(imgs/catX.png);
+}
+
+#start {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: whitesmoke;
+  border: solid 3px black;
+  color: black;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.65;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+#start:hover {
+  opacity: 1;
+  border: solid 3px orangered;
+}
+
+#cat-foot {
+  margin-left: 5px;
+  width: 22px;
 }
