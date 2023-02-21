@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
 @font-face {
   font-family: mogihaPen;
   src: url(font/mogihaPen.ttf);
@@ -135,9 +135,10 @@ h3 > b:nth-child(2) {
 #cat-foot {
   margin-left: 5px;
   width: 22px;
+  pointer-events: none;
 }
 
-.board-container {
+#board-container {
   margin-top: 5vh;
   display: none;
   justify-content: center;
@@ -155,10 +156,11 @@ h3 > b:nth-child(2) {
   display: flex;
   justify-content: center;
   color: black;
-  font-size: 120px;
+  font-size: 145px;
   border-right: 2px black solid;
   border-bottom: 2px black solid;
-  line-height: 120px;
+  line-height: 135px;
+  font-family: 'Finger Paint', cursive;
 }
 
 .box.o {
