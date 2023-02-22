@@ -2,14 +2,26 @@ const game = (() => {
   const playerFactory = (name, mark, turn) => ({ name, mark, turn });
   const player1 = playerFactory('player 1', '', true);
   const player2 = playerFactory('player 2', '', false);
-
+  const board = [];
+  const winConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  let winner = null;
   // Function for the game board
   const gamePlay = (function () {
-    const board = [];
     const box = document.querySelectorAll('.box');
     box.forEach((a) => {
       a.addEventListener('click', (e) => {
         console.log(board);
+        console.log(winner);
+        console.log(winChecker());
         if (player1.turn === true && e.target.textContent === '') {
           board[e.target.id] = player1.mark;
           a.textContent = player1.mark;
@@ -26,6 +38,26 @@ const game = (() => {
       });
     });
   })();
+
+  const winChecker = () => {
+    const firstPlays = board.reduce(
+      (a, v, i) => (v === player1.mark ? a.concat(i) : a),
+      []
+    );
+    const secondPlays = board.reduce(
+      (a, v, i) => (v === player2.mark ? a.concat(i) : a),
+      []
+    );
+
+    for (const [index, combo] of winConditions.entries()) {
+      if (combo.every((elem) => firstPlays.includes(elem) === true)) {
+        winner = 'p1';
+      } else if (combo.every((elem) => secondPlays.indexOf(elem) > -1)) {
+        winner = 'p2';
+      }
+    }
+    return { firstPlays, secondPlays, winner };
+  };
 
   const clickEvent = (() => {
     document.addEventListener('click', (e) => {
