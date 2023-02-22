@@ -179,3 +179,10 @@ h3 > b:nth-child(2) {
 .box:nth-child(6) ~ .box {
   border-bottom: none;
 }
+
+
+.game-msg {
+text-align: center;
+font-size: 50px;  
+
+}

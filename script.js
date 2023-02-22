@@ -14,6 +14,7 @@ const game = (() => {
     [2, 4, 6],
   ];
   let winner = null;
+  let roundCount = 0;
   // Function for the game board
   const gamePlay = (function () {
     const box = document.querySelectorAll('.box');
@@ -21,25 +22,39 @@ const game = (() => {
       a.addEventListener('click', (e) => {
         console.log(board);
         console.log(winner);
-        console.log(winChecker());
-        if (player1.turn === true && e.target.textContent === '') {
+        if (
+          player1.turn === true &&
+          e.target.textContent === '' &&
+          winner === null
+        ) {
           board[e.target.id] = player1.mark;
           a.textContent = player1.mark;
           a.classList.add(player1.mark);
           player1.turn = false;
           player2.turn = true;
-        } else if (player2.turn === true && e.target.textContent === '') {
+          roundCount += 1;
+        } else if (
+          player2.turn === true &&
+          e.target.textContent === '' &&
+          winner === null
+        ) {
           board[e.target.id] = player2.mark;
           a.textContent = player2.mark;
           a.classList.add(player2.mark);
           player1.turn = true;
           player2.turn = false;
+          roundCount += 1;
         }
+
+        console.log(roundCount);
+        winChecker();
       });
     });
   })();
 
   const winChecker = () => {
+    const winnerDisplay = document.querySelector('.game-msg');
+
     const firstPlays = board.reduce(
       (a, v, i) => (v === player1.mark ? a.concat(i) : a),
       []
@@ -56,7 +71,14 @@ const game = (() => {
         winner = 'p2';
       }
     }
-    return { firstPlays, secondPlays, winner };
+
+    if (winner === 'p1') {
+      winnerDisplay.innerHTML = 'You are the winner!';
+    } else if (winner === 'p2') {
+      winnerDisplay.innerHTML = 'You lost the game!';
+    } else if (winner === null && roundCount > 8) {
+      winnerDisplay.innerHTML = 'The game is a tie!';
+    }
   };
 
   const clickEvent = (() => {
