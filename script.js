@@ -14,6 +14,7 @@ const game = (() => {
     [2, 4, 6],
   ];
   let winner = null;
+  let winnerArr = [];
   let roundCount = 0;
   // Function for the game board
   const gamePlay = (function () {
@@ -21,7 +22,6 @@ const game = (() => {
     box.forEach((a) => {
       a.addEventListener('click', (e) => {
         console.log(board);
-        console.log(winner);
         if (
           player1.turn === true &&
           e.target.textContent === '' &&
@@ -47,7 +47,10 @@ const game = (() => {
         }
 
         console.log(roundCount);
+        console.log(winnerArr);
+        console.log(winner);
         winChecker();
+        winPainter(box);
       });
     });
   })();
@@ -67,8 +70,10 @@ const game = (() => {
     for (const [index, combo] of winConditions.entries()) {
       if (combo.every((elem) => firstPlays.includes(elem) === true)) {
         winner = 'p1';
+        winnerArr = combo;
       } else if (combo.every((elem) => secondPlays.indexOf(elem) > -1)) {
         winner = 'p2';
+        winnerArr = combo;
       }
     }
 
@@ -77,8 +82,20 @@ const game = (() => {
     } else if (winner === 'p2') {
       winnerDisplay.innerHTML = 'You lost the game!';
     } else if (winner === null && roundCount > 8) {
-      winnerDisplay.innerHTML = 'The game is a tie!';
+      winnerDisplay.innerHTML = 'It is a tie!';
     }
+  };
+
+  const winPainter = (box) => {
+    box.forEach((a) => {
+      for (let i = 0; i < winnerArr.length; i++) {
+        if (a.id == winnerArr[i]) {
+          a.classList.contains('o')
+            ? (a.style.backgroundColor = '#fecaca')
+            : (a.style.backgroundColor = '#99f6e4');
+        }
+      }
+    });
   };
 
   const clickEvent = (() => {
